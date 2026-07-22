@@ -50,6 +50,106 @@
     width: 100%;
   }
 </style>
+  <style>
+/* メニューバー全体 */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    position: fixed; /* 常に上に表示 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+/* メニュー項目 */
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* ホバー時 */
+.navbar a:hover {
+    background-color: #575757;
+}
+
+/* ドロップダウンコンテナ */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* ドロップダウンボタン */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 20px;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* ドロップダウン内のリンク */
+.dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #666;
+}
+
+/* ホバーで表示 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ページ内容の余白調整 */
+body {
+    margin: 0;
+    padding-top: 50px; /* 固定メニュー分の余白 */
+}
+</style>
+</head>
+<body>
+
+<!-- 後付けメニュー -->
+<div class="navbar">
+    <a href="#home">ホーム</a>
+    <a href="#about">会社概要</a>
+    <div class="dropdown">
+        <button class="dropbtn">サービス ▼</button>
+        <div class="dropdown-content">
+            <a href="#web">Web制作</a>
+            <a href="#app">アプリ開発</a>
+            <a href="#seo">SEO対策</a>
+        </div>
+    </div>
+    <a href="#contact">お問い合わせ</a>
+</div>
+
+<!-- ページ内容 -->
+<div style="padding:20px;">
+</div>
 </head>
 <body>
 <div class="page">
