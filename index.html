@@ -49,113 +49,37 @@
   .yt-row a img {
     width: 100%;
   }
-</style>
-  <style>
-/* メニューバー全体 */
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    position: fixed; /* 常に上に表示 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-}
 
-/* メニュー項目 */
-.navbar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 10px;
-    text-decoration: none;
-}
+html{scroll-behavior:smooth;}
+.menu-btn{position:fixed;top:18px;right:calc((100vw - min(750px,100vw))/2 + 18px);width:52px;height:52px;border:none;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;font-size:28px;cursor:pointer;z-index:10000}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;visibility:hidden;transition:.25s;z-index:9998}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:-320px;width:300px;max-width:80%;height:100%;background:#111;color:#fff;transition:.25s;z-index:9999;padding:72px 24px;overflow:auto}
+.drawer.open{right:0}
+.drawer h2{font:700 22px sans-serif;color:#d8b04c;margin:0 0 18px}
+.drawer a{display:block;color:#fff;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15);font:16px sans-serif}
+.to-top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;z-index:9997}
+.to-top.show{opacity:1}
 
-/* ホバー時 */
-.navbar a:hover {
-    background-color: #575757;
-}
-
-/* ドロップダウンコンテナ */
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
-/* ドロップダウンボタン */
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 10px;
-    background-color: inherit;
-    cursor: pointer;
-}
-
-/* ドロップダウンメニュー */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #666;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* ドロップダウン内のリンク */
-.dropdown-content a {
-    float: none;
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #666;
-}
-
-/* ホバーで表示 */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* ページ内容の余白調整 */
-body {
-    margin: 0;
-    padding-top: 50px; /* 固定メニュー分の余白 */
-}
 </style>
 </head>
 <body>
 
-<!-- 後付けメニュー -->
-<div class="navbar">
-    <a href="#">トップ</a>
-    <a href="https://teket.jp/14274/67030">チケット</a>
-    <div class="dropdown">
-        <button class="dropbtn">ページ内 ▼</button>
-        <div class="dropdown-content">
-            <a href="#robby">ロビーイベント</a>
-            <a href="#robby">その他イベント</a>
-            <a href="#ending">終演後企画</a>
-          <a href="#members">出演者</a>
-          <a href="#Explan">楽曲解説</a>
-          <a href="#joybrass">出展情報</a>
-          <a href="#history">歴史</a> 
-        </div>
-    </div>
-    <a href="https://www.youtube.com/@minors_channel">動画</a>
-</div>
+<button class="menu-btn" id="menuBtn">☰</button>
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer">
+<h2>MENU</h2>
+<a href="#">トップ</a>
+<a href="https://teket.jp/14274/67030">チケット</a>
+<a href="#robby">ロビーイベント</a>
+<a href="#ending">終演後企画</a>
+<a href="#members">出演者</a>
+<a href="#Explan">楽曲解説</a>
+<a href="#joybrass">出展情報</a>
+<a href="#history">歴史</a>
+<a href="https://www.youtube.com/@minors_channel">動画</a>
+</nav>
 
-<!-- ページ内容 -->
-<div style="padding:20px;">
-</div>
-</head>
-<body>
 <div class="page">
 
   <!-- ヘッダー〜開催情報 -->
@@ -216,5 +140,16 @@ body {
   <img src="images/16_footer.png" alt="マイナーズの歴史つづき minorstrombone.com Copyright 2026 supported by Star Brass Company">
 
 </div>
+
+<a href="#" class="to-top" id="toTop">↑</a>
+<script>
+const b=document.getElementById('menuBtn'),d=document.getElementById('drawer'),o=document.getElementById('overlay');
+function c(){d.classList.remove('open');o.classList.remove('open')}
+b.onclick=()=>{d.classList.toggle('open');o.classList.toggle('open')};
+o.onclick=c;
+document.querySelectorAll('.drawer a').forEach(a=>a.onclick=c);
+const t=document.getElementById('toTop');
+addEventListener('scroll',()=>t.classList.toggle('show',scrollY>500));
+</script>
 </body>
 </html>
