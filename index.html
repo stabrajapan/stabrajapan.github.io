@@ -425,7 +425,17 @@ transform:translateY(-2px);
     transform:translateY(-3px);
     background:rgba(45,45,45,.55);
 }
+.to-top .arrow{
+    font-size:20px;
+    line-height:1;
+}
 
+.to-top .label{
+    font-size:12px;      /* 9px→12px */
+    letter-spacing:.08em;
+    line-height:1;
+    margin-top:-2px;
+}
 </style>
 </head>
 <body>
@@ -526,8 +536,8 @@ transform:translateY(-2px);
 </div>
 
 <a href="#" class="to-top" id="toTop">
-   <span>↑</span>
-   <span>TOP</span>
+    <span class="arrow">↑</span>
+    <span class="label">TOP</span>
    </a>
 <script>
 const b=document.getElementById('menuBtn'),d=document.getElementById('drawer'),o=document.getElementById('overlay');
