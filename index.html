@@ -685,6 +685,135 @@ transform:translateY(-2px);
     transform:rotate(90deg);
 
 }
+/*==============================
+Movie Popup
+==============================*/
+
+.movie-overlay{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:99990;
+
+}
+
+.movie-overlay.show{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+.movie-window{
+
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-45%) scale(.95);
+
+    width:520px;
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:rgba(20,20,20,.90);
+
+    backdrop-filter:blur(18px);
+
+    color:white;
+
+    text-align:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:99991;
+
+}
+
+.movie-window.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translate(-50%,-50%) scale(1);
+
+}
+
+.movie-window h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+}
+
+.movie-sub{
+
+    margin:18px 0 24px;
+
+    color:#e4c56c;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+.movie-close{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+}
+
+.movie-later{
+
+    margin-top:20px;
+
+    border:none;
+
+    background:none;
+
+    color:#bbb;
+
+    cursor:pointer;
+
+}
+
+.movie-later:hover{
+
+    color:white;
+
+}
 </style>
 </head>
 <body>
@@ -880,6 +1009,86 @@ commentLink.addEventListener("click", function(){
     commentOverlay.classList.remove("show");
 
 });
+const movieOverlay = document.getElementById("movieOverlay");
+const movieWindow = document.getElementById("movieWindow");
+const movieClose = document.getElementById("movieClose");
+const movieLater = document.getElementById("movieLater");
+const introMovie = document.getElementById("introMovie");
+
+let movieShown = false;
+
+addEventListener("scroll",function(){
+
+    if(movieShown) return;
+
+    const trigger = document.getElementById("ending");
+
+    const y = trigger.getBoundingClientRect().bottom;
+
+    if(y < window.innerHeight*0.45){
+
+        movieShown = true;
+
+        movieOverlay.classList.add("show");
+        movieWindow.classList.add("show");
+
+    }
+
+});
+
+function closeMovie(){
+
+    introMovie.pause();
+
+    movieOverlay.classList.remove("show");
+    movieWindow.classList.remove("show");
+
+}
+
+movieClose.onclick = closeMovie;
+movieLater.onclick = closeMovie;
+movieOverlay.onclick = closeMovie;
 </script>
+   <div class="movie-overlay" id="movieOverlay"></div>
+
+<div class="movie-window" id="movieWindow">
+
+    <button class="movie-close" id="movieClose">
+        ×
+    </button>
+
+    <h2>🎺</h2>
+
+    <p>
+
+        まだマイナーズを<br>
+        ご存じない方へ
+
+    </p>
+
+    <p class="movie-sub">
+
+        30秒だけ覗いてみませんか？
+
+    </p>
+
+    <video
+        id="introMovie"
+        controls
+        preload="metadata"
+        playsinline
+        width="100%">
+
+        <source src="movie/yokoku2026.mp4" type="video/mp4">
+
+    </video>
+
+    <button class="movie-later" id="movieLater">
+
+        あとで見る
+
+    </button>
+
+</div>
 </body>
 </html>
