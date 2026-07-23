@@ -956,6 +956,47 @@ Movie Popup
     </a>
 
 </div>
+   <div class="movie-overlay" id="movieOverlay"></div>
+
+<div class="movie-window" id="movieWindow">
+
+    <button class="movie-close" id="movieClose">
+        ×
+    </button>
+
+    <h2>🎺</h2>
+
+    <p>
+
+        まだマイナーズを<br>
+        ご存じない方へ
+
+    </p>
+
+    <p class="movie-sub">
+
+        30秒だけ覗いてみませんか？
+
+    </p>
+
+    <video
+        id="introMovie"
+        controls
+        preload="metadata"
+        playsinline
+        width="100%">
+
+        <source src="yokoku2026_1.mp4" type="video/mp4">
+
+    </video>
+
+    <button class="movie-later" id="movieLater">
+
+        あとで見る
+
+    </button>
+
+</div>
 <script>
 const b=document.getElementById('menuBtn'),d=document.getElementById('drawer'),o=document.getElementById('overlay');
 function c(){d.classList.remove('open');o.classList.remove('open')}
@@ -1021,11 +1062,12 @@ addEventListener("scroll",function(){
 
     if(movieShown) return;
 
-    const trigger = document.getElementById("ending");
+const trigger = document.getElementById("ending");
 
-    const y = trigger.getBoundingClientRect().bottom;
+const triggerY =
+    trigger.offsetTop + trigger.offsetHeight;
 
-    if(y < window.innerHeight*0.45){
+if(scrollY > triggerY - window.innerHeight * 0.6){
 
         movieShown = true;
 
@@ -1049,46 +1091,5 @@ movieClose.onclick = closeMovie;
 movieLater.onclick = closeMovie;
 movieOverlay.onclick = closeMovie;
 </script>
-   <div class="movie-overlay" id="movieOverlay"></div>
-
-<div class="movie-window" id="movieWindow">
-
-    <button class="movie-close" id="movieClose">
-        ×
-    </button>
-
-    <h2>🎺</h2>
-
-    <p>
-
-        まだマイナーズを<br>
-        ご存じない方へ
-
-    </p>
-
-    <p class="movie-sub">
-
-        30秒だけ覗いてみませんか？
-
-    </p>
-
-    <video
-        id="introMovie"
-        controls
-        preload="metadata"
-        playsinline
-        width="100%">
-
-        <source src="yokoku2026_1.mp4" type="video/mp4">
-
-    </video>
-
-    <button class="movie-later" id="movieLater">
-
-        あとで見る
-
-    </button>
-
-</div>
 </body>
 </html>
