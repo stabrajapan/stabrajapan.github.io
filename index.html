@@ -6,38 +6,100 @@
 <title>真夏の爆音!トロンボーン祭 in名古屋|ザ・トロンボーンアンサンブルマイナーズ 結成30周年記念名古屋特別演奏会</title>
 <meta name="description" content="ザ・トロンボーンアンサンブルマイナーズ 結成30周年記念名古屋特別演奏会。2026年8月14日(金)名古屋市青少年文化センター アートピア 17:30開場 18:30開演">
 <style>
+/* ============================================
+   マイナーズ30周年記念 特設サイト
+   --------------------------------------------
+   Illustratorで制作したデザインを
+   スライス画像として書き出し、
+   HTMLへ縦に配置する構成です。
+
+   デザイン基準幅：750pt
+   書き出し画像：1500px（@2x）
+
+   ※画像本体は編集せず、
+     CSS・JavaScriptのみで
+     サイト全体のデザインや動きを調整します。
+============================================ */
   /* ============================================
-     マイナーズウェブ 画像スライス構成
-     元データ: Illustrator制作 750pt幅(@2x = 1500px)
-     ============================================ */
+   CSS Index
+
+   1. 基本設定
+   2. ページ本体
+   3. YouTubeエリア
+   4. スマートフォン表示
+   5. MENUボタン
+   6. オーバーレイ
+   7. ドロワーメニュー
+   8. ページトップボタン
+============================================ */
+  /* ============================================
+   基本設定
+============================================ */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  html, body {
-    background: #000;
-  }
-  /* ページ全体のラッパー(最大幅750px、中央寄せ) */
-  .page {
-    max-width: 750px;
-    margin: 0 auto;
-    background: #fff;
-    /* スライス間の隙間防止 */
-    font-size: 0;
-    line-height: 0;
-  }
-  /* 各スライス画像:幅100%で隙間なく縦に連結 */
+  html{scroll-behavior:smooth;}
+  html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #0b0b0b url("images/background-brand.png") center center fixed no-repeat;
+  background-size: cover;
+}
+/* ============================================
+   ページ本体
+   Illustratorから書き出した
+   全スライス画像をまとめる領域
+
+   ・PC最大1000px
+   ・スマホでは画面いっぱい
+   ・中央配置
+============================================ */
+.page {
+  width: 95%;
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+
+/* Illustratorから書き出した画像同士に
+   隙間が発生しないようにする */
+  font-size: 0;
+  line-height: 0;
+
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 80px rgba(0,0,0,.45);
+}
+/* 各スライス画像
+
+   display:block
+      → img特有の余白を除去
+
+   width:100%
+      → ページ幅いっぱいに表示
+
+   height:auto
+      → 縦横比を保持
+*/
   .page img {
     display: block;
     width: 100%;
     height: auto;
   }
-  /* リンク帯(ボタン) */
+/* スライス画像全体を
+   ボタンとしてクリック可能にする */
   .page a {
     display: block;
   }
-  /* YouTube動画3列の行 */
+/* ============================================
+   YouTube動画エリア
+
+   Illustratorでは3枚の画像として
+   書き出しているため、
+   CSSで横一列に並べて表示する。
+============================================ */
   .yt-row {
     display: flex;
   }
@@ -49,23 +111,256 @@
   .yt-row a img {
     width: 100%;
   }
+  /* ============================================
+   スマートフォン表示
 
-html{scroll-behavior:smooth;}
-.menu-btn{position:fixed;top:18px;right:calc((100vw - min(750px,100vw))/2 + 18px);width:52px;height:52px;border:none;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;font-size:28px;cursor:pointer;z-index:10000}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;visibility:hidden;transition:.25s;z-index:9998}
-.overlay.open{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:-320px;width:300px;max-width:80%;height:100%;background:#111;color:#fff;transition:.25s;z-index:9999;padding:72px 24px;overflow:auto}
+   ・ページ幅100%
+   ・角丸なし
+   ・影なし
+   ・ボタン位置調整
+============================================ */
+@media (max-width:768px){
+
+.page{
+
+width:100%;
+max-width:750px;
+
+margin:0 auto;
+
+border-radius:0;
+
+box-shadow:none;
+
+}
+
+.menu-btn{
+
+right:18px;
+
+top:18px;
+
+}
+.to-top{
+
+right:18px;
+
+bottom:18px;
+
+width:48px;
+
+height:48px;
+
+font-size:20px;
+
+}
+
+}
+  /* ============================================
+   MENUボタン
+
+   画面右上に固定表示
+   ガラス風デザイン
+============================================ */
+.menu-btn{
+position:fixed;
+top:20px;
+right:calc((100vw - min(1000px,95vw))/2 + 20px);
+
+width:78px;
+height:46px;
+
+border:none;
+border-radius:24px;
+
+background:rgba(28,28,28,.35);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+
+color:#e4c56c;
+
+font:700 14px/46px "Helvetica Neue",sans-serif;
+letter-spacing:.12em;
+text-align:center;
+
+cursor:pointer;
+
+transition:.25s;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.35);
+
+z-index:10000;
+}
+  .menu-btn:hover{
+
+transform:translateY(-2px);
+
+background:rgba(45,45,45,.55);
+
+box-shadow:
+0 14px 36px rgba(0,0,0,.45);
+
+}
+  /* ============================================
+   オーバーレイ
+
+   ドロワーメニュー表示時に
+   背景を暗くするレイヤー
+============================================ */
+.overlay{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.25s;
+
+    z-index:9998;
+
+}
+
+.overlay.open{
+
+    opacity:1;
+    visibility:visible;
+
+}
+  /* ============================================
+   スライドメニュー
+
+   MENUボタンから表示される
+   右側ドロワーメニュー
+============================================ */
+.drawer{
+position:fixed;
+top:0;
+right:-340px;
+
+width:320px;
+max-width:82%;
+
+height:100%;
+
+padding:80px 30px;
+
+background:rgba(18,18,18,.78);
+
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+
+border-left:
+1px solid rgba(255,255,255,.08);
+
+color:#fff;
+
+transition:.35s;
+
+overflow:auto;
+
+z-index:9999;
+}
 .drawer.open{right:0}
-.drawer h2{font:700 22px sans-serif;color:#d8b04c;margin:0 0 18px}
-.drawer a{display:block;color:#fff;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15);font:16px sans-serif}
-.to-top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;z-index:9997}
-.to-top.show{opacity:1}
+.drawer h2{
+
+font:700 28px "Helvetica Neue",sans-serif;
+
+letter-spacing:.18em;
+
+text-align:center;
+
+margin-bottom:36px;
+
+color:#e4c56c;
+
+}
+.drawer a{
+
+display:block;
+
+padding:18px 10px;
+
+text-decoration:none;
+
+color:white;
+
+font:15px "Helvetica Neue",sans-serif;
+
+letter-spacing:.08em;
+
+border-bottom:
+1px solid rgba(255,255,255,.08);
+
+transition:.25s;
+
+}
+  .drawer a:hover{
+
+padding-left:24px;
+
+color:#e4c56c;
+
+}
+  /* ============================================
+   ページトップへ戻るボタン
+
+   スクロール時のみ表示
+============================================ */
+.to-top{
+    position:fixed;
+
+    right:24px;
+    bottom:24px;
+
+    width:56px;
+    height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    text-decoration:none;
+
+    background:rgba(28,28,28,.35);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    color:#e4c56c;
+    font-size:24px;
+    font-weight:bold;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+    opacity:0;
+    transition:
+        opacity .25s,
+        transform .25s,
+        background .25s;
+
+    z-index:9997;
+}
+
+.to-top.show{
+    opacity:1;
+}
+
+.to-top:hover{
+    transform:translateY(-3px);
+    background:rgba(45,45,45,.55);
+}
 
 </style>
 </head>
 <body>
 
-<button class="menu-btn" id="menuBtn">☰</button>
+<button class="menu-btn" id="menuBtn">MENU</button>
 <div class="overlay" id="overlay"></div>
 <nav class="drawer" id="drawer">
 <h2>MENU</h2>
