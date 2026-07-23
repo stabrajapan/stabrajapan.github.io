@@ -202,6 +202,15 @@ box-shadow:
 0 14px 36px rgba(0,0,0,.45);
 
 }
+.menu-btn.hide{
+
+    opacity:0;
+
+    transform:translateY(-10px);
+
+    pointer-events:none;
+
+}
   /* ============================================
    オーバーレイ
 
@@ -824,6 +833,15 @@ function c(){d.classList.remove('open');o.classList.remove('open')}
 b.onclick=()=>{d.classList.toggle('open');o.classList.toggle('open')};
 o.onclick=c;
 document.querySelectorAll('.drawer a').forEach(a=>a.onclick=c);
+/* 初期状態ではMENUを隠す */
+b.classList.add("hide");
+
+/* 少しスクロールしたら表示 */
+addEventListener("scroll",()=>{
+
+    b.classList.toggle("hide",scrollY<250);
+
+});
 const t=document.getElementById('toTop');
 addEventListener('scroll',()=>t.classList.toggle('show',scrollY>500));
 
